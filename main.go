@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
@@ -66,6 +67,8 @@ func createQueues(cli *client, list []string) (success []string, ok bool) {
 			continue
 		}
 		success = append(success, q)
+
+		time.Sleep(100 * time.Millisecond)
 	}
 	return success, true
 }
