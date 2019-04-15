@@ -26,6 +26,11 @@ func awsConfig() *aws.Config {
 }
 
 func awsCredentials() *credentials.Credentials {
+	if envEndpoint() != "" {
+		// use dummy credentials when custom endpoint is used
+		return credentials.AnonymousCredentials
+	}
+
 	// from env
 	cred := credentials.NewEnvCredentials()
 	_, err := cred.Get()
